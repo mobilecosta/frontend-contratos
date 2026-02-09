@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosHeaders } from 'axios';
 
 const defaultBaseURL = import.meta.env.PROD
   ? 'https://backend-contratos.vercel.app'
@@ -13,14 +13,9 @@ export const api = axios.create({
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('accessToken');
   if (token) {
-    if (config.headers && typeof config.headers.set === 'function') {
-      config.headers.set('Authorization', `Bearer ${token}`);
-    } else {
-      config.headers = {
-        ...(config.headers ?? {}),
-        Authorization: `Bearer ${token}`
-      };
-    }
+    const headers = AxiosHeaders.from(config.headers);
+    headers.set('Authorization', `Bearer ${token}`);
+    config.headers = headers;
   }
   return config;
 });
