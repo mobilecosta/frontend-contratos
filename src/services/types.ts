@@ -24,7 +24,7 @@ export type Contrato = {
 
 export type LoginPayload = {
   email: string;
-  senha: string;
+  password: string;
 };
 
 export type LoginResponse = {
