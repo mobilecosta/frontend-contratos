@@ -1,7 +1,7 @@
 import axios, { AxiosHeaders } from 'axios';
 
 const defaultBaseURL = import.meta.env.PROD
-  ? 'https://backend-contratos.vercel.app'
+  ? 'https://backend-contratos.vercel.app/api'
   : 'http://localhost:8080';
 
 const baseURL = (import.meta.env.VITE_API_URL ?? defaultBaseURL).replace(/\/$/, '');
