@@ -18,7 +18,7 @@ export function LoginPage() {
     setError('');
 
     try {
-      await login({ email, senha });
+      await login({ email, password: senha });
       navigate(redirectTo, { replace: true });
     } catch {
       setError('Credenciais inválidas ou backend indisponível.');
