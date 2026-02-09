@@ -32,6 +32,14 @@ npm run build
 npm run preview
 ```
 
+## Deploy na Vercel
+
+Este projeto já está preparado para deploy como SPA na Vercel:
+
+- `vercel.json` inclui rewrite para `index.html` em qualquer rota.
+- Em produção, o frontend usa como fallback a API `https://backend-contratos.vercel.app`.
+- Se necessário, sobrescreva via variável de ambiente `VITE_API_URL` no projeto da Vercel.
+
 ## Integração com backend
 
 Este frontend foi preparado para consumir endpoints REST com o seguinte padrão:

@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-const baseURL = import.meta.env.VITE_API_URL ?? 'http://localhost:8080';
+const defaultBaseURL = import.meta.env.PROD
+  ? 'https://backend-contratos.vercel.app'
+  : 'http://localhost:8080';
+
+const baseURL = (import.meta.env.VITE_API_URL ?? defaultBaseURL).replace(/\/$/, '');
 
 export const api = axios.create({
   baseURL
