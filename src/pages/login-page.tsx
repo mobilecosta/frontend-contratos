@@ -1,5 +1,6 @@
 import { type FormEvent, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { useAuth } from '../services/auth-context';
 
 export function LoginPage() {
@@ -10,18 +11,38 @@ export function LoginPage() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const redirectTo = (location.state as { from?: string } | null)?.from ?? '/clientes';
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     setError('');
+    setIsLoading(true);
 
     try {
       await login({ email, password: senha });
       navigate(redirectTo, { replace: true });
-    } catch {
-      setError('Credenciais inválidas ou backend indisponível.');
+    } catch (err) {
+      let errorMessage = 'Erro ao fazer login. Tente novamente.';
+
+      if (axios.isAxiosError(err)) {
+        if (err.response?.status === 401 || err.response?.status === 403) {
+          errorMessage = 'E-mail ou senha inválidos.';
+        } else if (err.response?.status === 400) {
+          errorMessage = 'Campos obrigatórios não preenchidos corretamente.';
+        } else if (!err.response) {
+          errorMessage = 'Não foi possível conectar ao servidor. Verifique sua conexão.';
+        } else if (err.response?.status >= 500) {
+          errorMessage = 'Erro no servidor. Tente novamente em alguns momentos.';
+        }
+      } else if (err instanceof Error) {
+        errorMessage = err.message;
+      }
+
+      setError(errorMessage);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -42,7 +63,9 @@ export function LoginPage() {
           <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} required />
         </label>
 
-        <button type="submit">Acessar</button>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? 'Acessando...' : 'Acessar'}
+        </button>
       </form>
     </div>
   );
