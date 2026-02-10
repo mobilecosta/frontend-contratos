@@ -28,5 +28,10 @@ export type LoginPayload = {
 };
 
 export type LoginResponse = {
-  token: string;
+  token?: string;
+  accessToken?: string;
+  access_token?: string;
+  data?: {
+    token?: string;
+  };
 };

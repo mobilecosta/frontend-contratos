@@ -12,6 +12,26 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
+function resolveToken(response: LoginResponse): string | null {
+  if (typeof response.token === 'string' && response.token.length > 0) {
+    return response.token;
+  }
+
+  if (typeof response.accessToken === 'string' && response.accessToken.length > 0) {
+    return response.accessToken;
+  }
+
+  if (typeof response.access_token === 'string' && response.access_token.length > 0) {
+    return response.access_token;
+  }
+
+  if (response.data && typeof response.data.token === 'string' && response.data.token.length > 0) {
+    return response.data.token;
+  }
+
+  return null;
+}
+
 export function AuthProvider({ children }: PropsWithChildren) {
   const [token, setToken] = useState<string | null>(() => localStorage.getItem('accessToken'));
 
@@ -21,8 +41,14 @@ export function AuthProvider({ children }: PropsWithChildren) {
       isAuthenticated: Boolean(token),
       login: async (payload) => {
         const { data } = await api.post<LoginResponse>('/auth/login', payload);
-        localStorage.setItem('accessToken', data.token);
-        setToken(data.token);
+        const resolvedToken = resolveToken(data);
+
+        if (!resolvedToken) {
+          throw new Error('Token não encontrado na resposta de login');
+        }
+
+        localStorage.setItem('accessToken', resolvedToken);
+        setToken(resolvedToken);
       },
       logout: () => {
         localStorage.removeItem('accessToken');
