@@ -134,3 +134,19 @@ td {
 .error {
   color: #be123c;
 }
+
+.error.success {
+  color: #059669;
+}
+
+.toggle-button {
+  background: #64748b;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.toggle-button:hover {
+  background: #475569;
+}
+
