@@ -3,8 +3,7 @@ import type { Produto } from '../services/types';
 
 const defaults: Produto = {
   nome: '',
-  descricao: '',
-  valor: 0
+  descricao: ''
 };
 
 export function ProdutosPage() {

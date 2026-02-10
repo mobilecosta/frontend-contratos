@@ -3,7 +3,6 @@ import type { Contrato } from '../services/types';
 
 const defaults: Contrato = {
   clienteId: 0,
-  produtoId: 0,
   dataInicio: '',
   dataFim: '',
   status: ''

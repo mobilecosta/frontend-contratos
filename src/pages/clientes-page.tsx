@@ -3,7 +3,6 @@ import type { Cliente } from '../services/types';
 
 const defaults: Cliente = {
   nome: '',
-  documento: '',
   email: '',
   telefone: ''
 };
