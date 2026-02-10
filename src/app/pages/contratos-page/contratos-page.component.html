@@ -1,0 +1,8 @@
+<app-entity-crud
+  title="Contrato"
+  [items]="contratos"
+  [columns]="columns"
+  (create)="onCreate($event)"
+  (edit)="onEdit($event)"
+  (delete)="onDelete($event)"
+></app-entity-crud>

@@ -1,0 +1,230 @@
+/* Global Styles for Angular */
+
+:root {
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  background: #0f766e;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-weight: 500;
+}
+
+button:hover:not(:disabled) {
+  background: #115e59;
+}
+
+button:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+button.secondary {
+  background: #334155;
+}
+
+button.secondary:hover {
+  background: #1f2937;
+}
+
+button.danger {
+  background: #be123c;
+}
+
+button.danger:hover {
+  background: #9f1239;
+}
+
+input, textarea, select {
+  padding: 0.55rem 0.65rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #0f766e;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.login-wrapper {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.login-card {
+  width: min(440px, 100%);
+  display: grid;
+  gap: 0.9rem;
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgb(15 23 42 / 0.1);
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+}
+
+.sidebar {
+  background: #0f172a;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.brand {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.sidebar nav {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.sidebar a {
+  color: #cbd5e1;
+  text-decoration: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.sidebar a:hover {
+  background: #1f2937;
+  color: white;
+}
+
+.sidebar a.active {
+  color: white;
+  font-weight: 700;
+  background: #0f766e;
+}
+
+.content {
+  padding: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.panel {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  overflow-x: auto;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+}
+
+.grid-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 0.75rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: #f1f5f9;
+  text-align: left;
+  padding: 0.65rem;
+  border-bottom: 2px solid #e2e8f0;
+  font-weight: 600;
+}
+
+td {
+  text-align: left;
+  padding: 0.65rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+tbody tr:hover {
+  background: #f8fafc;
+}
+
+.error {
+  color: #be123c;
+}
+
+.success {
+  color: #059669;
+  font-weight: 500;
+}
+
+.toggle-button {
+  background: #64748b;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.toggle-button:hover {
+  background: #475569;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .grid-form {
+    grid-template-columns: 1fr;
+  }
+}

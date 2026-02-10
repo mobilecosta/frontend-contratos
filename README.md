@@ -1,46 +1,97 @@
-# Frontend Contratos
+# Frontend Contratos - Angular
 
-Frontend em React + Vite para autenticação e gestão de **clientes**, **produtos** e **contratos**.
+Frontend em **Angular 18** para autenticação e gestão de **clientes**, **produtos** e **contratos**.
+
+## Alterações de Vite + React para Angular
+
+Este projeto foi migrado de **Vite + React** para **Angular 18**. As principais mudanças incluem:
+
+- ✅ Conversão de componentes React para Angular components standalone
+- ✅ Migração de React Router para Angular Router
+- ✅ Conversão de AuthContext para AuthService com RxJS
+- ✅ Substituição de Axios por HttpClient do Angular
+- ✅ Estrutura de pastas seguindo padrão Angular
+- ✅ Tipagem forte com TypeScript
 
 ## Funcionalidades
 
-- Login com armazenamento de token JWT no `localStorage`.
-- Rotas protegidas após autenticação.
+- Login com armazenamento de token no `localStorage`
+- Rotas protegidas após autenticação com `authGuard`
 - CRUD completo para:
   - Clientes (`/clientes`)
   - Produtos (`/produtos`)
   - Contratos (`/contratos`)
-- Configuração da URL da API por variável de ambiente (`VITE_API_URL`).
+- Dashboard com navegação lateral
+- API service centralizado com HttpClient
 
 ## Requisitos
 
 - Node.js 18+
-- Backend rodando localmente (por padrão em `http://localhost:8080`)
+- Backend rodando localmente (por padrão em `http://localhost:3000/api`)
 
 ## Instalação
 
 ```bash
 npm install
-cp .env.example .env
 npm run dev
 ```
+
+A aplicação estará disponível em `http://localhost:4200`
 
 ## Build
 
 ```bash
+# Build para desenvolvimento
 npm run build
+
+# Build para produção
+npm run build:prod
+
+# Preview do build
 npm run preview
 ```
 
-## Deploy na Vercel
+## Estrutura de Pastas
 
-Este projeto já está preparado para deploy como SPA na Vercel:
+```
+src/
+├── app/
+│   ├── components/
+│   │   ├── dashboard-layout/      # Layout principal
+│   │   ├── entity-crud/           # Componente CRUD reutilizável
+│   │   └── protected-route/       # Proteção de rotas
+│   ├── pages/
+│   │   ├── login-page/
+│   │   ├── dashboard-page/
+│   │   ├── clientes-page/
+│   │   ├── produtos-page/
+│   │   └── contratos-page/
+│   ├── services/
+│   │   ├── api.service.ts         # Serviço HTTP centralizado
+│   │   └── auth.service.ts        # Autenticação e estado do usuário
+│   ├── models/
+│   │   └── types.ts               # Interfaces e tipos
+│   ├── guards/
+│   │   └── auth.guard.ts          # Guard de proteção de rotas
+│   ├── app.routes.ts              # Configuração de rotas
+│   ├── app.component.ts           # Componente raiz
+│   ├── app.component.html
+│   └── app.component.css
+├── main.ts                         # Bootstrap da aplicação
+├── styles.css                      # Estilos globais
+└── index.html
+```
 
-- `vercel.json` inclui rewrite para `index.html` em qualquer rota.
-- Em produção, o frontend usa como fallback a API `https://backend-contratos.vercel.app`.
-- Se necessário, sobrescreva via variável de ambiente `VITE_API_URL` no projeto da Vercel.
+## Configuração da API
 
-## Integração com backend
+Por padrão, a API está configurada para `http://localhost:3000/api`. Para alterar, edite:
+
+```typescript
+// src/app/services/api.service.ts
+private baseURL = 'http://seu-backend.com/api';
+```
+
+## Integração com Backend
 
 Este frontend foi preparado para consumir endpoints REST com o seguinte padrão:
 
@@ -52,4 +103,43 @@ Este frontend foi preparado para consumir endpoints REST com o seguinte padrão:
 - `GET/POST /contratos`
 - `PUT/DELETE /contratos/:id`
 
-Caso os nomes dos campos ou rotas no backend sejam diferentes, ajuste os arquivos em `src/services` e `src/pages`.
+Ajuste os serviços em `src/app/services/` conforme necessário.
+
+## Scripts Disponíveis
+
+- `npm run start` - Inicia servidor de desenvolvimento
+- `npm run dev` - Inicia servidor com live reload
+- `npm run build` - Build para produção
+- `npm run test` - Executa testes
+- `npm run lint` - Verifica qualidade do código
+
+## Autenticação
+
+A autenticação está implementada com mock de dados. Para integrar com um backend real:
+
+1. Edite `src/app/services/auth.service.ts`
+2. Implemente as chamadas reais de API
+3. Configure as variáveis de ambiente conforme necessário
+
+## Componentes Reutilizáveis
+
+### EntityCrud
+Componente genérico para CRUD de entidades. Exemplo de uso:
+
+```typescript
+<app-entity-crud
+  title="Cliente"
+  [items]="clientes"
+  [columns]="['nome', 'email', 'telefone']"
+  (create)="onCreate($event)"
+  (edit)="onEdit($event)"
+  (delete)="onDelete($event)"
+></app-entity-crud>
+```
+
+## Styling
+
+O projeto usa CSS puro com variáveis CSS globais. Os estilos estão em:
+- Globais: `src/styles.css`
+- Por componente: `src/app/components/**/*.css`
+

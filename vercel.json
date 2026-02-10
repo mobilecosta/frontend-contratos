@@ -1,3 +1,6 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/frontend-contratos",
+  "framework": "angular",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }

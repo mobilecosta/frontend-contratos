@@ -1,0 +1,45 @@
+<div class="crud-container">
+  <div class="crud-header">
+    <h2>{{ title }}</h2>
+    <button (click)="openForm()" class="btn btn-primary">+ Novo {{ title }}</button>
+  </div>
+
+  <div *ngIf="showForm" class="form-modal">
+    <div class="form-container">
+      <h3>{{ isEditing ? 'Editar' : 'Criar' }} {{ title }}</h3>
+      <form (ngSubmit)="submitForm()">
+        <div *ngFor="let column of columns" class="form-group">
+          <label>{{ column }}</label>
+          <input 
+            type="text" 
+            [(ngModel)]="formData[column]" 
+            [name]="column"
+            required
+          >
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-success">Salvar</button>
+          <button type="button" (click)="closeForm()" class="btn btn-secondary">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <table class="crud-table">
+    <thead>
+      <tr>
+        <th *ngFor="let column of columns">{{ column }}</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td *ngFor="let column of columns">{{ item[column] }}</td>
+        <td class="actions">
+          <button (click)="editItem(item)" class="btn btn-sm btn-info">Editar</button>
+          <button (click)="deleteItem(item)" class="btn btn-sm btn-danger">Deletar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
