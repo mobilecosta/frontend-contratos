@@ -15,8 +15,7 @@ export function ProdutosPage() {
       defaults={defaults}
       fields={[
         { name: 'nome', label: 'Nome' },
-        { name: 'descricao', label: 'Descrição' },
-        { name: 'valor', label: 'Valor', type: 'number' }
+        { name: 'descricao', label: 'Descrição' }
       ]}
     />
   );

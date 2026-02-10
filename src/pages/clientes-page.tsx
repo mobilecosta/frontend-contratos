@@ -16,7 +16,6 @@ export function ClientesPage() {
       defaults={defaults}
       fields={[
         { name: 'nome', label: 'Nome', type: 'text' },
-        { name: 'documento', label: 'Documento', type: 'text' },
         { name: 'email', label: 'E-mail', type: 'email' },
         { name: 'telefone', label: 'Telefone', type: 'tel' }
       ]}
