@@ -13,18 +13,32 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 function resolveToken(response: LoginResponse): string | null {
+  // Estrutura principal: session.access_token (Supabase)
+  if (response.session?.access_token) {
+    return response.session.access_token;
+  }
+
+  // Fallback: data.session.access_token
+  if (response.data?.session?.access_token) {
+    return response.data.session.access_token;
+  }
+
+  // Fallback: response.token
   if (typeof response.token === 'string' && response.token.length > 0) {
     return response.token;
   }
 
+  // Fallback: response.accessToken
   if (typeof response.accessToken === 'string' && response.accessToken.length > 0) {
     return response.accessToken;
   }
 
+  // Fallback: response.access_token
   if (typeof response.access_token === 'string' && response.access_token.length > 0) {
     return response.access_token;
   }
 
+  // Fallback: data.token
   if (response.data && typeof response.data.token === 'string' && response.data.token.length > 0) {
     return response.data.token;
   }

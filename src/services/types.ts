@@ -28,10 +28,26 @@ export type LoginPayload = {
 };
 
 export type LoginResponse = {
+  user?: {
+    id: string;
+    email: string;
+    role: string;
+  };
+  session?: {
+    access_token: string;
+    token_type: string;
+    expires_in: number;
+    refresh_token?: string;
+  };
   token?: string;
   accessToken?: string;
   access_token?: string;
   data?: {
     token?: string;
+    accessToken?: string;
+    access_token?: string;
+    session?: {
+      access_token: string;
+    };
   };
 };
