@@ -23,8 +23,8 @@ export class LoginPage {
   ) {}
 
   async login() {
-    if (!this.email || !this.password) {
-      this.error = 'Por favor, preencha todos os campos';
+    if (!this.email) {
+      this.error = 'Por favor, preencha o email';
       return;
     }
 
@@ -32,7 +32,7 @@ export class LoginPage {
     this.error = '';
 
     try {
-      const user = await this.authService.login(this.email, this.password).toPromise();
+      const user = await this.authService.login(this.email).toPromise();
       if (user) {
         this.router.navigate(['/']);
       }

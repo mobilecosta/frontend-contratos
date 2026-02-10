@@ -16,7 +16,7 @@ export class AuthService {
     return userJSON ? JSON.parse(userJSON) : null;
   }
 
-  login(email: string, password: string): Observable<any> {
+  login(email: string): Observable<any> {
     // Esta é uma implementação mockada. Substitua com sua lógica real de autenticação
     const mockUser: User = {
       id: '1',

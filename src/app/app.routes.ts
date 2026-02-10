@@ -4,7 +4,6 @@ import { DashboardPage } from './pages/dashboard-page/dashboard-page.component';
 import { ClientesPage } from './pages/clientes-page/clientes-page.component';
 import { ProdutosPage } from './pages/produtos-page/produtos-page.component';
 import { ContratosPage } from './pages/contratos-page/contratos-page.component';
-import { ProtectedRoute } from './components/protected-route/protected-route.component';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
