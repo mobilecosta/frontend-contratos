@@ -1,7 +1,6 @@
 export type Cliente = {
   id?: number;
   nome: string;
-  documento: string;
   email: string;
   telefone: string;
 };
@@ -9,14 +8,12 @@ export type Cliente = {
 export type Produto = {
   id?: number;
   nome: string;
-  descricao: string;
-  valor: number;
+  descricao: string
 };
 
 export type Contrato = {
   id?: number;
   clienteId: number;
-  produtoId: number;
   dataInicio: string;
   dataFim: string;
   status: string;
