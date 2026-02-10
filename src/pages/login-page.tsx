@@ -11,7 +11,7 @@ export function LoginPage() {
   const [senha, setSenha] = useState('');
   const [error, setError] = useState('');
 
-  const redirectTo = (location.state as { from?: string } | null)?.from ?? '/';
+  const redirectTo = (location.state as { from?: string } | null)?.from ?? '/clientes';
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
